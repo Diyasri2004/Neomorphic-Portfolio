@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diya Srivastava | Portfolio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Syne for massive headers, Space Grotesk for body, Space Mono for tech text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #000000;
+            --accent-pink: #FF007F;
+            --accent-green: #00FF66;
+            --accent-purple: #B28DFF;
+            --border-width: 4px;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+            /* Brutalist custom cursor */
+            cursor: crosshair;
+        }
+
+        /* Prevent scrolling while loader is active or mobile menu open */
+        body.loading, body.menu-open {
+            overflow: hidden !important;
+        }
+
+        h1, h2, h3, h4, .font-syne {
+            font-family: 'Syne', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .font-mono {
+            font-family: 'Space Mono', monospace;
+        }
+
+        ::selection {
+            background-color: var(--accent-pink);
+            color: white;
+        }
+
+        /* Neo-Brutalist Utility Classes */
+        .brutal-border {
+            border: var(--border-width) solid var(--text-color);
+        }
+
+        .brutal-border-b {
+            border-bottom: var(--border-width) solid var(--text-color);
+        }
+        
+        .brutal-border-t {
+            border-top: var(--border-width) solid var(--text-color);
+        }
+
+        .brutal-shadow {
+            box-shadow: 8px 8px 0px 0px var(--text-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .brutal-shadow:hover {
+            transform: translate(4px, 4px);
+            box-shadow: 4px 4px 0px 0px var(--text-color);
+        }
+
+        .brutal-shadow-pink {
+            box-shadow: 8px 8px 0px 0px var(--accent-pink);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .brutal-shadow-pink:hover {
+            transform: translate(4px, 4px);
+            box-shadow: 4px 4px 0px 0px var(--accent-pink);
+        }
+
+        /* Marquee Animation */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+            background: var(--accent-pink);
+            color: white;
+            padding: 10px 0;
+            border-top: var(--border-width) solid black;
+            border-bottom: var(--border-width) solid black;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+
+        .marquee-content span {
+            margin: 0 1rem;
+            font-family: 'Space Mono', monospace;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .marquee-content span {
+                margin: 0 2rem;
+                font-size: 1.2rem;
+            }
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Glitch or harsh hover for links */
+        .brutal-link {
+            position: relative;
+            display: inline-block;
+            font-weight: bold;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        .brutal-link::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 4px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--accent-pink);
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+
+        .brutal-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Noise Texture Overlay */
+        .bg-noise {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Fix shadow overflow on mobile */
+        @media (max-width: 768px) {
+            .brutal-shadow {
+                box-shadow: 4px 4px 0px 0px var(--text-color);
+            }
+            .brutal-shadow:hover {
+                transform: translate(2px, 2px);
+                box-shadow: 2px 2px 0px 0px var(--text-color);
+            }
+            .brutal-shadow-pink {
+                box-shadow: 4px 4px 0px 0px var(--accent-pink);
+            }
+            .brutal-shadow-pink:hover {
+                transform: translate(2px, 2px);
+                box-shadow: 2px 2px 0px 0px var(--accent-pink);
+            }
+            :root {
+                --border-width: 3px;
+            }
+            .container-padding {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased loading">
+
+    <!-- MASt SA LOADING SCREEN -->
+    <div id="brutal-loader" class="fixed inset-0 z-[9999] bg-[#FF007F] text-black flex flex-col justify-center items-center transition-all duration-700 ease-[cubic-bezier(0.77,0,0.175,1)]">
+        <!-- Noise for loader -->
+        <div class="absolute inset-0 opacity-[0.15] pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.8\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E');"></div>
+        
+        <div class="relative z-10 w-full px-6 flex flex-col items-center">
+            <div class="font-mono text-sm md:text-xl font-bold mb-4 bg-black text-white px-4 py-1 brutal-border shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]">
+                ASSEMBLING ASSETS
+            </div>
+            
+            <!-- Huge Counter -->
+            <div class="text-[25vw] md:text-[20vw] font-syne font-extrabold tracking-tighter leading-none mb-8 text-black" style="-webkit-text-stroke: 2px black; color: transparent; text-shadow: 8px 8px 0px white;" id="loader-text-display">
+                0%
+            </div>
+            
+            <!-- Loading Bar -->
+            <div class="w-full max-w-2xl bg-black/20 h-8 md:h-12 border-4 border-black relative overflow-hidden brutal-shadow">
+                <div id="loader-bar" class="absolute top-0 left-0 h-full bg-[#00FF66] w-0 border-r-4 border-black transition-all duration-75"></div>
+            </div>
+            
+            <!-- Ticker below -->
+            <div class="mt-8 font-mono font-bold text-xs md:text-sm overflow-hidden w-full max-w-2xl text-center bg-white border-4 border-black py-2 brutal-shadow">
+                <span id="loading-status" class="animate-pulse">FETCHING DATA...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Noise overlay for texture -->
+    <div class="bg-noise"></div>
+
+    <nav class="fixed top-0 w-full bg-[#fcfcfc] z-40 brutal-border-b flex justify-between items-center p-4 md:px-8">
+        <div class="text-2xl font-syne font-extrabold tracking-tighter relative z-50">
+            <a href="#" class="hover:text-[#FF007F] transition-colors">DS<span class="text-[#FF007F]">.</span></a>
+        </div>
+        <div class="hidden md:flex gap-8 text-lg font-bold">
+            <a href="#about" class="brutal-link p-2">ABOUT</a>
+            <a href="#skills" class="brutal-link p-2">SKILLS</a>
+            <a href="#projects" class="brutal-link p-2">PROJECTS</a>
+            <a href="#experience" class="brutal-link p-2">EXPERIENCE</a>
+        </div>
+        <a href="#contact" class="hidden md:inline-block bg-black text-white px-6 py-2 font-syne text-xl brutal-shadow hover:bg-[#FF007F] transition-colors brutal-border">
+            HIRE ME
+        </a>
+        <!-- Mobile Menu Icon -->
+        <button id="mobile-menu-btn" class="md:hidden text-3xl relative z-50 p-2 focus:outline-none" aria-label="Toggle mobile menu">
+            <i class="ph ph-list transition-transform"></i>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-[#fcfcfc] z-40 transform translate-x-full transition-transform duration-300 md:hidden flex flex-col items-center justify-center gap-8 font-syne text-3xl sm:text-4xl">
+        <a href="#about" class="mobile-link hover:text-[#FF007F] p-4">ABOUT</a>
+        <a href="#skills" class="mobile-link hover:text-[#FF007F] p-4">SKILLS</a>
+        <a href="#projects" class="mobile-link hover:text-[#FF007F] p-4">PROJECTS</a>
+        <a href="#experience" class="mobile-link hover:text-[#FF007F] p-4">EXPERIENCE</a>
+        <a href="#contact" class="mobile-link bg-black text-white px-8 py-4 mt-4 brutal-shadow brutal-border">HIRE ME</a>
+    </div>
+
+    <header class="pt-28 md:pt-32 pb-12 md:pb-16 px-4 md:px-8 min-h-[90vh] flex flex-col justify-center relative container-padding">
+        <div class="max-w-7xl mx-auto w-full relative z-10">
+            <!-- Decorative Elements -->
+            <div class="absolute -top-10 -left-10 text-[8rem] text-[#FF007F] opacity-50 font-mono animate-pulse hidden md:block">*</div>
+            
+            <div class="flex flex-col items-start gap-4">
+                <div class="inline-block bg-[#00FF66] text-black px-4 py-2 font-mono font-bold brutal-border brutal-shadow mb-2 md:mb-4 text-xs sm:text-sm md:text-base break-words w-full sm:w-auto">
+                    AVAILABLE FOR WORK 2026 // OPEN TO ROLES
+                </div>
+                
+                <h1 class="text-[12vw] sm:text-[11vw] md:text-[8vw] leading-[0.85] font-syne tracking-tighter mix-blend-difference w-full mt-4">
+                    DIYA<br>
+                    SRIVASTAVA
+                </h1>
+                
+                <p class="mt-6 md:mt-8 max-w-2xl text-lg sm:text-xl md:text-3xl font-bold leading-tight border-l-4 md:border-l-8 border-[#FF007F] pl-4 md:pl-6 py-2">
+                    Continuously innovating to make life easier through intuitive design and Artificial Intelligence.
+                </p>
+
+                <div class="mt-8 md:mt-12 flex flex-col sm:flex-row flex-wrap gap-4 font-mono font-bold w-full sm:w-auto">
+                    <a href="mailto:srivastava.diya2004@gmail.com" class="bg-white brutal-border brutal-shadow px-4 sm:px-6 py-3 md:py-4 flex items-center justify-center gap-2 hover:bg-[#FF007F] hover:text-white transition-colors text-sm sm:text-base w-full sm:w-auto break-all">
+                        <i class="ph ph-envelope-simple text-xl flex-shrink-0"></i> Email Me
+                    </a>
+                    <a href="https://www.linkedin.com/in/diya-srivastava-14b150276/" target="_blank" class="bg-[#B28DFF] text-black brutal-border brutal-shadow px-4 sm:px-6 py-3 md:py-4 flex items-center justify-center gap-2 hover:bg-black hover:text-white transition-colors text-sm sm:text-base w-full sm:w-auto">
+                        <i class="ph ph-linkedin-logo text-xl flex-shrink-0"></i> LinkedIn
+                    </a>
+                    <a href="https://github.com/Diyasri2004" target="_blank" class="bg-black text-white brutal-border brutal-shadow px-4 sm:px-6 py-3 md:py-4 flex items-center justify-center gap-2 hover:bg-[#00FF66] hover:text-black transition-colors text-sm sm:text-base w-full sm:w-auto">
+                        <i class="ph ph-github-logo text-xl flex-shrink-0"></i> GitHub
+                    </a>
+                    <a href="https://drive.google.com/file/d/1v1XbkOoTGpeJdVDzVU_e8SeROOHYOQ1S/view?usp=sharing" target="_blank" class="bg-[#FF007F] text-white brutal-border brutal-shadow px-4 sm:px-6 py-3 md:py-4 flex items-center justify-center gap-2 hover:bg-white hover:text-black transition-colors text-sm sm:text-base w-full sm:w-auto">
+                        <i class="ph ph-file-text text-xl flex-shrink-0"></i> Resume
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Abstract shape -->
+        <div class="absolute bottom-10 right-10 w-32 h-32 md:w-64 md:h-64 bg-[#FF007F] rounded-full brutal-border brutal-shadow mix-blend-multiply hidden md:block"></div>
+        <div class="absolute bottom-20 right-32 w-24 h-24 bg-[#00FF66] brutal-border brutal-shadow mix-blend-multiply hidden md:block"></div>
+    </header>
+
+    <!-- Ticker Marquee -->
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <span>DATA STRUCTURES & ALGORITHMS</span>
+            <span>✦</span>
+            <span>BACKEND DEVELOPMENT</span>
+            <span>✦</span>
+            <span>MACHINE LEARNING</span>
+            <span>✦</span>
+            <span>CLOUD OPS</span>
+            <span>✦</span>
+            <span>SYSTEM DESIGN</span>
+            <span>✦</span>
+            <span>DATA STRUCTURES & ALGORITHMS</span>
+            <span>✦</span>
+            <span>BACKEND DEVELOPMENT</span>
+            <span>✦</span>
+            <span>MACHINE LEARNING</span>
+            <span>✦</span>
+            <span>CLOUD OPS</span>
+            <span>✦</span>
+            <span>SYSTEM DESIGN</span>
+        </div>
+    </div>
+
+    <section id="about" class="py-16 md:py-24 px-4 md:px-8 border-b-4 border-black bg-white container-padding">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+            <div>
+                <h2 class="text-4xl md:text-7xl mb-8 break-words">
+                    <span class="text-[#FF007F]">*</span> PROFILE
+                </h2>
+                <div class="bg-[#fcfcfc] p-6 md:p-8 brutal-border brutal-shadow relative mt-6 md:mt-0">
+                    <div class="absolute -top-4 -right-2 sm:-right-4 bg-[#B28DFF] px-3 md:px-4 py-1 brutal-border font-mono font-bold text-xs md:text-sm">
+                        WHO AM I?
+                    </div>
+                    <p class="text-base sm:text-lg md:text-xl font-medium leading-relaxed mb-6 mt-2 md:mt-0">
+                        Hi, I'm Diya Srivastava, a Computer Science undergraduate at SRM Institute of Science and Technology. An AI enthusiast, and builder driven by curiosity and a passion for solving real-world problems through technology.
+                    </p>
+                    <p class="text-base sm:text-lg md:text-xl font-medium leading-relaxed mb-6">
+                        From developing AI-powered learning platforms and machine learning applications to exploring cloud technologies and scalable backend systems, I enjoy transforming ideas into impactful solutions. Beyond coding, I thrive in leadership roles, collaborative environments, and challenges that push me to think bigger, learn faster, and grow continuously.
+                    </p>
+                    <p class="text-base sm:text-lg md:text-xl font-medium leading-relaxed">
+                        Whether I'm building, leading, learning, or experimenting, my goal remains the same: to create technology that makes a lasting impact.
+                    </p>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-4xl md:text-7xl mb-8 break-words">
+                    <span class="text-[#00FF66]">+</span> EDUCATION
+                </h2>
+                <div class="space-y-6">
+                    <!-- Edu Card 1 -->
+                    <div class="bg-black text-white p-5 md:p-6 brutal-border brutal-shadow hover:bg-[#FF007F] transition-colors group">
+                        <div class="flex flex-col sm:flex-row justify-between items-start mb-2 gap-2">
+                            <h3 class="text-xl md:text-2xl break-words">SRM Institute Of Science And Technology</h3>
+                            <span class="bg-white text-black font-mono px-2 py-1 text-xs md:text-sm font-bold brutal-border whitespace-nowrap self-start sm:self-auto">2023 - PRESENT</span>
+                        </div>
+                        <p class="font-mono text-base md:text-lg mb-2 text-gray-200">B.Tech in Computer Science and Technology</p>
+                        <p class="font-mono text-xs md:text-sm text-gray-400 group-hover:text-white">Chennai (KTR), Tamil Nadu</p>
+                        <div class="mt-4 flex flex-wrap gap-3 font-mono font-bold text-xs md:text-sm">
+                            <span class="bg-[#00FF66] text-black px-3 py-1 brutal-border">SGPA: 8.95</span>
+                            <span class="bg-[#B28DFF] text-black px-3 py-1 brutal-border">CGPA: 8.73</span>
+                        </div>
+                    </div>
+                    <!-- Edu Card 2 -->
+                    <div class="bg-white text-black p-5 md:p-6 brutal-border brutal-shadow hover:bg-[#00FF66] transition-colors">
+                        <div class="flex flex-col sm:flex-row justify-between items-start mb-2 gap-2">
+                            <h3 class="text-xl md:text-2xl break-words">Diamond Public Sr. Sec. School</h3>
+                            <span class="bg-black text-white font-mono px-2 py-1 text-xs md:text-sm font-bold brutal-border whitespace-nowrap self-start sm:self-auto">2021 - 2023</span>
+                        </div>
+                        <p class="font-mono text-base md:text-lg mb-2">CBSE Intermediate PCM</p>
+                        <p class="font-mono text-xs md:text-sm text-gray-600">Lucknow, Uttar Pradesh</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-16 md:py-24 px-4 md:px-8 bg-[#000] text-white border-b-4 border-black container-padding">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-7xl mb-12 md:mb-16 text-center text-[#FF007F] break-words">TECHNICAL ARSENAL</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <!-- Skill Group -->
+                <div class="bg-white text-black p-6 md:p-8 brutal-border brutal-shadow-pink h-full">
+                    <h3 class="text-xl md:text-2xl mb-4 md:mb-6 border-b-4 border-black pb-2 inline-block">LANGUAGES</h3>
+                    <div class="flex flex-wrap gap-2 md:gap-3 font-mono font-bold">
+                        <span class="px-3 py-1.5 md:px-4 md:py-2 border-2 border-black rounded-full hover:bg-[#FF007F] hover:text-white transition-colors cursor-crosshair text-sm md:text-base">C/C++</span>
+                        <span class="px-3 py-1.5 md:px-4 md:py-2 border-2 border-black rounded-full hover:bg-[#FF007F] hover:text-white transition-colors cursor-crosshair text-sm md:text-base">Java</span>
+                        <span class="px-3 py-1.5 md:px-4 md:py-2 border-2 border-black rounded-full hover:bg-[#FF007F] hover:text-white transition-colors cursor-crosshair text-sm md:text-base">Python</span>
+                        <span class="px-3 py-1.5 md:px-4 md:py-2 border-2 border-black rounded-full hover:bg-[#FF007F] hover:text-white transition-colors cursor-crosshair text-sm md:text-base">HTML/CSS</span>
+                    </div>
+                </div>
+
+                <!-- Skill Group -->
+                <div class="bg-[#FF007F] text-white p-6 md:p-8 brutal-border brutal-shadow h-full">
+                    <h3 class="text-xl md:text-2xl mb-4 md:mb-6 border-b-4 border-white pb-2 inline-block">CORE CS & TECH</h3>
+                    <div class="flex flex-wrap gap-2 md:gap-3 font-mono font-bold text-black">
+                        <span class="bg-white px-3 py-1.5 md:px-4 md:py-2 brutal-border text-sm md:text-base">Data Structures & Algo</span>
+                        <span class="bg-white px-3 py-1.5 md:px-4 md:py-2 brutal-border text-sm md:text-base">DBMS</span>
+                        <span class="bg-white px-3 py-1.5 md:px-4 md:py-2 brutal-border text-sm md:text-base">OS</span>
+                        <span class="bg-white px-3 py-1.5 md:px-4 md:py-2 brutal-border text-sm md:text-base">OOP</span>
+                        <span class="bg-white px-3 py-1.5 md:px-4 md:py-2 brutal-border text-sm md:text-base">Backend Dev</span>
+                        <span class="bg-white px-3 py-1.5 md:px-4 md:py-2 brutal-border text-sm md:text-base">REST APIs</span>
+                    </div>
+                </div>
+
+                <!-- Skill Group -->
+                <div class="bg-[#B28DFF] text-black p-6 md:p-8 brutal-border brutal-shadow h-full sm:col-span-2 lg:col-span-1">
+                    <h3 class="text-xl md:text-2xl mb-4 md:mb-6 border-b-4 border-black pb-2 inline-block">TOOLS & CLOUD</h3>
+                    <div class="flex flex-wrap gap-2 md:gap-3 font-mono font-bold">
+                        <span class="bg-white px-3 py-1.5 md:px-4 md:py-2 brutal-border text-sm md:text-base">AWS (CloudOps)</span>
+                        <span class="bg-white px-3 py-1.5 md:px-4 md:py-2 brutal-border text-sm md:text-base">Git/GitHub</span>
+                        <span class="bg-white px-3 py-1.5 md:px-4 md:py-2 brutal-border text-sm md:text-base">TensorFlow / Keras</span>
+                        <span class="bg-white px-3 py-1.5 md:px-4 md:py-2 brutal-border text-sm md:text-base">Scikit-learn</span>
+                        <span class="bg-white px-3 py-1.5 md:px-4 md:py-2 brutal-border text-sm md:text-base">MySQL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-16 md:py-24 px-4 md:px-8 bg-[#fcfcfc] border-b-4 border-black container-padding">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16 gap-6">
+                <h2 class="text-5xl md:text-8xl break-words leading-none">FEATURED<br>PROJECTS</h2>
+                <p class="font-mono text-base md:text-xl max-w-sm font-bold bg-[#00FF66] p-4 brutal-border w-full md:w-auto">
+                    BUILDING SCALABLE SOLUTIONS WITH REAL-WORLD IMPACT.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+                
+                <!-- Project 1 -->
+                <div class="bg-white brutal-border brutal-shadow flex flex-col h-full hover:translate-y-0 md:hover:-translate-y-2 transition-transform duration-300">
+                    <div class="border-b-4 border-black p-4 md:p-6 bg-[#FF007F] text-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                        <h3 class="text-2xl md:text-3xl break-words">NeuroTwin</h3>
+                        <span class="font-mono text-xs md:text-sm bg-black px-2 py-1 font-bold brutal-border border-white whitespace-nowrap">JAN 2026</span>
+                    </div>
+                    <div class="p-4 md:p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <p class="font-bold text-base md:text-lg mb-4">EEG-Based Cognitive State Prediction</p>
+                            <ul class="list-none space-y-2 md:space-y-3 font-medium mb-6 text-sm md:text-base">
+                                <li class="flex items-start gap-2"><i class="ph-fill ph-caret-right text-[#FF007F] mt-1 flex-shrink-0"></i> <span>Developed an ML pipeline to classify cognitive states from EEG signals using preprocessing, extraction, and training techniques.</span></li>
+                                <li class="flex items-start gap-2"><i class="ph-fill ph-caret-right text-[#FF007F] mt-1 flex-shrink-0"></i> <span>Engineered signal processing workflows (normalization, filtering) improving classification consistency.</span></li>
+                            </ul>
+                        </div>
+                        <div class="mt-auto">
+                            <div class="flex flex-wrap gap-2 font-mono text-[10px] md:text-xs font-bold mb-4 md:mb-6">
+                                <span class="bg-gray-200 px-2 py-1 brutal-border">Python</span>
+                                <span class="bg-gray-200 px-2 py-1 brutal-border">NumPy</span>
+                                <span class="bg-gray-200 px-2 py-1 brutal-border">TensorFlow/Keras</span>
+                            </div>
+                            <a href="#" class="inline-block bg-black text-white w-full text-center py-3 md:py-4 font-syne text-lg md:text-xl brutal-border brutal-shadow hover:bg-[#00FF66] hover:text-black transition-colors">
+                                VIEW PROJECT <i class="ph ph-arrow-up-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="bg-white brutal-border brutal-shadow flex flex-col h-full hover:translate-y-0 md:hover:-translate-y-2 transition-transform duration-300">
+                    <div class="border-b-4 border-black p-4 md:p-6 bg-[#B28DFF] text-black flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                        <h3 class="text-2xl md:text-3xl break-words">ProfX AI</h3>
+                        <span class="font-mono text-xs md:text-sm bg-white px-2 py-1 font-bold brutal-border whitespace-nowrap">FEB 2026</span>
+                    </div>
+                    <div class="p-4 md:p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <p class="font-bold text-base md:text-lg mb-4">Personal AI Professor</p>
+                            <ul class="list-none space-y-2 md:space-y-3 font-medium mb-6 text-sm md:text-base">
+                                <li class="flex items-start gap-2"><i class="ph-fill ph-caret-right text-[#B28DFF] mt-1 flex-shrink-0"></i> <span>Backend-driven system to automate Q&A generation from PDFs, PPTs, and scans using text processing.</span></li>
+                                <li class="flex items-start gap-2"><i class="ph-fill ph-caret-right text-[#B28DFF] mt-1 flex-shrink-0"></i> <span>Implemented multi-format parsing and OCR extraction.</span></li>
+                                <li class="flex items-start gap-2"><i class="ph-fill ph-caret-right text-[#B28DFF] mt-1 flex-shrink-0"></i> <span>Designed dynamic marks-based question generation system & API integration.</span></li>
+                            </ul>
+                        </div>
+                        <div class="mt-auto">
+                            <div class="flex flex-wrap gap-2 font-mono text-[10px] md:text-xs font-bold mb-4 md:mb-6">
+                                <span class="bg-gray-200 px-2 py-1 brutal-border">Python</span>
+                                <span class="bg-gray-200 px-2 py-1 brutal-border">Flask</span>
+                                <span class="bg-gray-200 px-2 py-1 brutal-border">Tesseract OCR</span>
+                            </div>
+                            <a href="#" class="inline-block bg-black text-white w-full text-center py-3 md:py-4 font-syne text-lg md:text-xl brutal-border brutal-shadow hover:bg-[#FF007F] hover:text-white transition-colors">
+                                VIEW PROJECT <i class="ph ph-arrow-up-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="bg-white brutal-border brutal-shadow flex flex-col h-full hover:translate-y-0 md:hover:-translate-y-2 transition-transform duration-300">
+                    <div class="border-b-4 border-black p-4 md:p-6 bg-[#00FF66] text-black flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                        <h3 class="text-2xl md:text-3xl break-words">DeepDive AI</h3>
+                        <span class="font-mono text-xs md:text-sm bg-white px-2 py-1 font-bold brutal-border whitespace-nowrap">MAR 2026</span>
+                    </div>
+                    <div class="p-4 md:p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <p class="font-bold text-base md:text-lg mb-4">Multimedia Analysis Web App</p>
+                            <ul class="list-none space-y-2 md:space-y-3 font-medium mb-6 text-sm md:text-base">
+                                <li class="flex items-start gap-2"><i class="ph-fill ph-caret-right text-[#00FF66] mt-1 flex-shrink-0"></i> <span>Built a system to convert video/audio inputs into transcripts, summaries, and key insights.</span></li>
+                                <li class="flex items-start gap-2"><i class="ph-fill ph-caret-right text-[#00FF66] mt-1 flex-shrink-0"></i> <span>Integrated Speech-to-text and NLP for efficient data transformation.</span></li>
+                                <li class="flex items-start gap-2"><i class="ph-fill ph-caret-right text-[#00FF66] mt-1 flex-shrink-0"></i> <span>Optimized performance using SHA-256 caching.</span></li>
+                            </ul>
+                        </div>
+                        <div class="mt-auto">
+                            <div class="flex flex-wrap gap-2 font-mono text-[10px] md:text-xs font-bold mb-4 md:mb-6">
+                                <span class="bg-gray-200 px-2 py-1 brutal-border">Streamlit</span>
+                                <span class="bg-gray-200 px-2 py-1 brutal-border">OpenAI API</span>
+                                <span class="bg-gray-200 px-2 py-1 brutal-border">Whisper</span>
+                            </div>
+                            <a href="#" class="inline-block bg-black text-white w-full text-center py-3 md:py-4 font-syne text-lg md:text-xl brutal-border brutal-shadow hover:bg-[#B28DFF] hover:text-black transition-colors">
+                                VIEW PROJECT <i class="ph ph-arrow-up-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="bg-white brutal-border brutal-shadow flex flex-col h-full hover:translate-y-0 md:hover:-translate-y-2 transition-transform duration-300">
+                    <div class="border-b-4 border-black p-4 md:p-6 bg-black text-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                        <h3 class="text-2xl md:text-3xl break-words">E-Voting System</h3>
+                        <span class="font-mono text-xs md:text-sm bg-white text-black px-2 py-1 font-bold brutal-border whitespace-nowrap">NOV 2023</span>
+                    </div>
+                    <div class="p-4 md:p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <p class="font-bold text-base md:text-lg mb-4">Secure Web-Based Voting</p>
+                            <ul class="list-none space-y-2 md:space-y-3 font-medium mb-6 text-sm md:text-base">
+                                <li class="flex items-start gap-2"><i class="ph-fill ph-caret-right text-black mt-1 flex-shrink-0"></i> <span class="text-black">Developed voting system with user authentication and backend data management.</span></li>
+                                <li class="flex items-start gap-2"><i class="ph-fill ph-caret-right text-black mt-1 flex-shrink-0"></i> <span class="text-black">Ensured data integrity using one-user-one-vote logic to prevent fraud.</span></li>
+                                <li class="flex items-start gap-2"><i class="ph-fill ph-caret-right text-black mt-1 flex-shrink-0"></i> <span class="text-black">SQL-based database integration for secure validation.</span></li>
+                            </ul>
+                        </div>
+                        <div class="mt-auto">
+                            <div class="flex flex-wrap gap-2 font-mono text-[10px] md:text-xs font-bold mb-4 md:mb-6">
+                                <span class="bg-gray-200 px-2 py-1 brutal-border">HTML/CSS/JS</span>
+                                <span class="bg-gray-200 px-2 py-1 brutal-border">Python</span>
+                                <span class="bg-gray-200 px-2 py-1 brutal-border">SQL</span>
+                            </div>
+                            <a href="#" class="inline-block bg-black text-white w-full text-center py-3 md:py-4 font-syne text-lg md:text-xl brutal-border brutal-shadow hover:bg-[#FF007F] hover:text-white transition-colors">
+                                VIEW PROJECT <i class="ph ph-arrow-up-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="py-16 md:py-24 px-4 md:px-8 border-b-4 border-black bg-[#FF007F] text-white container-padding">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-7xl mb-12 md:mb-16 text-black tracking-tighter break-words leading-tight">POSITIONS OF RESPONSIBILITY</h2>
+            
+            <div class="space-y-6 md:space-y-8">
+                
+                <!-- Role 1 -->
+                <div class="bg-white text-black brutal-border brutal-shadow p-6 md:p-8 flex flex-col md:flex-row gap-4 md:gap-8 items-start">
+                    <div class="w-full md:w-1/3 flex-shrink-0">
+                        <div class="inline-block bg-black text-white font-mono font-bold px-2 md:px-3 py-1 mb-3 md:mb-4 brutal-border text-xs md:text-sm">NOV 2024 - MAR 2025</div>
+                        <h3 class="text-2xl md:text-3xl mb-2 leading-none break-words">EVENT COORDINATOR</h3>
+                        <p class="font-bold text-[#FF007F] text-base md:text-lg">Webnexus, Aaruush Techno Management Club</p>
+                    </div>
+                    <div class="w-full md:w-2/3 border-t-4 md:border-t-0 border-l-0 md:border-l-4 border-black pt-4 md:pt-0 md:pl-8">
+                        <p class="text-base md:text-lg font-medium mb-4">Co-led planning and execution of a technical event, ensuring smooth coordination and successful delivery.</p>
+                        <p class="text-base md:text-lg font-medium bg-[#f0f0f0] p-4 brutal-border">
+                            Engaged 70+ participants through interactive sessions and activities, enhancing participation and knowledge sharing.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Role 2 -->
+                <div class="bg-black text-white brutal-border brutal-shadow p-6 md:p-8 flex flex-col md:flex-row gap-4 md:gap-8 items-start border-white">
+                    <div class="w-full md:w-1/3 flex-shrink-0">
+                        <div class="inline-block bg-[#00FF66] text-black font-mono font-bold px-2 md:px-3 py-1 mb-3 md:mb-4 brutal-border border-white text-xs md:text-sm">OCT 2024 - PRESENT</div>
+                        <h3 class="text-2xl md:text-3xl mb-2 leading-none text-[#00FF66] break-words">COMMITTEE HEAD</h3>
+                        <p class="font-bold text-gray-300 text-base md:text-lg">Magefficie & Entrepreneurial Symposium</p>
+                    </div>
+                    <div class="w-full md:w-2/3 border-t-4 md:border-t-0 border-l-0 md:border-l-4 border-white pt-4 md:pt-0 md:pl-8">
+                        <ul class="space-y-3 md:space-y-4 text-base md:text-lg font-medium">
+                            <li class="flex items-start gap-2"><i class="ph ph-asterisk text-[#00FF66] mt-1 flex-shrink-0"></i> <span>Led end-to-end execution of an entrepreneurship summit for 50+ participants.</span></li>
+                            <li class="flex items-start gap-2"><i class="ph ph-asterisk text-[#00FF66] mt-1 flex-shrink-0"></i> <span>Spearheaded planning and speaker coordination, ensuring seamless event flow.</span></li>
+                            <li class="flex items-start gap-2"><i class="ph ph-asterisk text-[#00FF66] mt-1 flex-shrink-0"></i> <span>Strengthened leadership, problem-solving, and organizational skills through large-scale event management.</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Role 3 -->
+                <div class="bg-white text-black brutal-border brutal-shadow p-6 md:p-8 flex flex-col md:flex-row gap-4 md:gap-8 items-start">
+                    <div class="w-full md:w-1/3 flex-shrink-0">
+                        <div class="inline-block bg-black text-white font-mono font-bold px-2 md:px-3 py-1 mb-3 md:mb-4 brutal-border text-xs md:text-sm">SEPT 2023 - PRESENT</div>
+                        <h3 class="text-2xl md:text-3xl mb-2 leading-none break-words">ORGANIZING COMMITTEE</h3>
+                        <p class="font-bold text-[#B28DFF] text-base md:text-lg">SRM Spikers, Sports Club</p>
+                    </div>
+                    <div class="w-full md:w-2/3 border-t-4 md:border-t-0 border-l-0 md:border-l-4 border-black pt-4 md:pt-0 md:pl-8">
+                        <p class="text-base md:text-lg font-medium mb-4">Organized and executed sports events involving 50+ participants, ensuring smooth coordination and scheduling.</p>
+                        <p class="text-base md:text-lg font-medium">Collaborated with multiple departments to streamline event operations and improve participant engagement.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 md:py-24 px-4 md:px-8 bg-white border-b-4 border-black container-padding">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-7xl mb-10 md:mb-12 text-center leading-tight">CERTIFICATIONS <br> <span class="text-stroke text-transparent" style="-webkit-text-stroke: 2px black;">& HACKATHONS</span></h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 font-mono font-bold">
+                
+                <a href="https://drive.google.com/file/d/1e6i_ArV6DNshwvVobGaHA-n-OQH-lvT-/view?usp=sharing" target="_blank" class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-[#fcfcfc] p-5 md:p-6 brutal-border brutal-shadow hover:bg-[#FF007F] hover:text-white transition-colors group">
+                    <span class="text-sm md:text-base pr-4">AWS Certified CloudOps Engineer</span>
+                    <div class="text-left sm:text-right w-full sm:w-auto flex sm:block justify-between items-center">
+                        <span class="block text-xs mb-0 sm:mb-1">APR 2026</span>
+                        <i class="ph ph-arrow-circle-up-right text-xl md:text-2xl group-hover:rotate-45 transition-transform"></i>
+                    </div>
+                </a>
+                
+                <a href="https://drive.google.com/file/d/17J5Ct18h7iFJ7802qznPcAsibxyszXyd/view?usp=sharing" target="_blank" class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-[#fcfcfc] p-5 md:p-6 brutal-border brutal-shadow hover:bg-[#00FF66] hover:text-black transition-colors group">
+                    <span class="text-sm md:text-base pr-4">AWS Certified Cloud Practitioner</span>
+                    <div class="text-left sm:text-right w-full sm:w-auto flex sm:block justify-between items-center">
+                        <span class="block text-xs mb-0 sm:mb-1">MAR 2026</span>
+                        <i class="ph ph-arrow-circle-up-right text-xl md:text-2xl group-hover:rotate-45 transition-transform"></i>
+                    </div>
+                </a>
+
+                <a href="https://drive.google.com/file/d/1h3lkszNd2FgpjZu2pSjWYoopIoJHld0y/view?usp=sharing" target="_blank" class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-[#fcfcfc] p-5 md:p-6 brutal-border brutal-shadow hover:bg-[#B28DFF] hover:text-black transition-colors group">
+                    <span class="text-sm md:text-base pr-4">TechXcelerate Participant</span>
+                    <div class="text-left sm:text-right w-full sm:w-auto flex sm:block justify-between items-center">
+                        <span class="block text-xs mb-0 sm:mb-1">MAR 2025</span>
+                        <i class="ph ph-arrow-circle-up-right text-xl md:text-2xl group-hover:rotate-45 transition-transform"></i>
+                    </div>
+                </a>
+
+                <a href="https://drive.google.com/file/d/1YMBbvki3JjZSXP-oueMkJhDmH95NGbRh/view?usp=sharing" target="_blank" class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-[#fcfcfc] p-5 md:p-6 brutal-border brutal-shadow hover:bg-black hover:text-white transition-colors group">
+                    <span class="text-sm md:text-base pr-4">DevNexus Participant</span>
+                    <div class="text-left sm:text-right w-full sm:w-auto flex sm:block justify-between items-center">
+                        <span class="block text-xs mb-0 sm:mb-1">APR 2025</span>
+                        <i class="ph ph-arrow-circle-up-right text-xl md:text-2xl group-hover:rotate-45 transition-transform"></i>
+                    </div>
+                </a>
+
+                <a href="https://drive.google.com/file/d/1jKoEzrW49F90XW-dhjFd7rTdq56grROr/view?usp=sharing" target="_blank" class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-[#fcfcfc] p-5 md:p-6 brutal-border brutal-shadow hover:bg-[#FF007F] hover:text-white transition-colors group md:col-span-2">
+                    <span class="flex items-center gap-3 md:gap-4">
+                        <i class="ph ph-certificate text-2xl md:text-3xl flex-shrink-0"></i>
+                        <span class="text-sm md:text-base">DSA - Deep Dive into Core Concepts (Nov 2024)</span>
+                    </span>
+                    <div class="w-full sm:w-auto flex justify-end mt-2 sm:mt-0">
+                        <i class="ph ph-arrow-circle-up-right text-xl md:text-2xl group-hover:rotate-45 transition-transform"></i>
+                    </div>
+                </a>
+
+                <a href="https://drive.google.com/file/d/15DjJsL2ry5l2qvHnDNGCimrrP8tmn2Sp/view?usp=sharing" target="_blank" class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-[#fcfcfc] p-5 md:p-6 brutal-border brutal-shadow hover:bg-[#00FF66] hover:text-black transition-colors group md:col-span-2">
+                    <span class="flex items-center gap-3 md:gap-4">
+                        <i class="ph ph-certificate text-2xl md:text-3xl flex-shrink-0"></i>
+                        <span class="text-sm md:text-base">NPTEL - Programming In Java (Oct 2024)</span>
+                    </span>
+                    <div class="w-full sm:w-auto flex justify-end mt-2 sm:mt-0">
+                        <i class="ph ph-arrow-circle-up-right text-xl md:text-2xl group-hover:rotate-45 transition-transform"></i>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-black text-white py-16 md:py-24 px-4 md:px-8 text-center relative overflow-hidden container-padding">
+        <!-- Huge background text -->
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[20vw] md:text-[15vw] font-syne opacity-10 whitespace-nowrap pointer-events-none">
+            HIRE ME
+        </div>
+
+        <div class="max-w-4xl mx-auto relative z-10">
+            <h2 class="text-4xl sm:text-5xl md:text-8xl mb-8 leading-tight">LET'S BUILD <br> <span class="text-[#FF007F] block sm:inline mt-2 sm:mt-0">SOMETHING RAD.</span></h2>
+            
+            <div class="inline-block bg-white text-black brutal-border brutal-shadow p-6 md:p-8 mb-12 transform rotate-1 md:rotate-2 w-full sm:w-auto mx-auto max-w-[90vw]">
+                <a href="mailto:srivastava.diya2004@gmail.com" class="text-lg sm:text-2xl md:text-5xl font-bold brutal-link hover:text-[#FF007F] transition-colors break-all md:break-normal block">
+                    srivastava.diya2004@gmail.com
+                </a>
+                <p class="font-mono text-base md:text-xl mt-4 font-bold">+91 7755001363</p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-4 md:gap-6 font-mono font-bold text-sm md:text-xl w-full">
+                <a href="https://www.linkedin.com/in/diya-srivastava-14b150276/" target="_blank" class="hover:text-[#FF007F] transition-colors flex flex-col items-center p-2"><i class="ph ph-linkedin-logo text-2xl md:text-3xl mb-1"></i>LinkedIn</a>
+                <a href="https://github.com/Diyasri2004" target="_blank" class="hover:text-[#00FF66] transition-colors flex flex-col items-center p-2"><i class="ph ph-github-logo text-2xl md:text-3xl mb-1"></i>GitHub</a>
+                <a href="https://drive.google.com/file/d/1v1XbkOoTGpeJdVDzVU_e8SeROOHYOQ1S/view?usp=sharing" target="_blank" class="hover:text-[#B28DFF] transition-colors flex flex-col items-center p-2"><i class="ph ph-file-text text-2xl md:text-3xl mb-1"></i>Resume</a>
+            </div>
+            
+            <div class="mt-16 md:mt-24 font-mono text-xs md:text-sm border-t-2 border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-400 gap-4 md:gap-0 text-center md:text-left">
+                <p>© 2026 DIYA SRIVASTAVA. ALL RIGHTS RESERVED.</p>
+                <p>DESIGNED WITH <span class="text-[#FF007F]">❤</span> & NEO-BRUTALISM.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loader & Mobile Menu Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Loader logic
+            let progress = 0;
+            const loaderText = document.getElementById("loader-text-display");
+            const loaderBar = document.getElementById("loader-bar");
+            const loader = document.getElementById("brutal-loader");
+            const statusText = document.getElementById("loading-status");
+            
+            const statuses = ["FETCHING DATA...", "COMPILING CSS...", "WAKING UP SERVER...", "INITIALIZING AI..."];
+
+            // Simulate loading progress
+            const loadingInterval = setInterval(() => {
+                progress += Math.floor(Math.random() * 10) + 2;
+                
+                if (progress % 3 === 0) {
+                    statusText.innerText = statuses[Math.floor(Math.random() * statuses.length)];
+                }
+                
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(loadingInterval);
+                    
+                    // Final UI updates
+                    loaderText.innerText = "100%";
+                    loaderText.style.color = "black";
+                    loaderText.style.textShadow = "8px 8px 0px #00FF66";
+                    loaderBar.style.width = "100%";
+                    statusText.innerText = "READY.";
+                    
+                    // Add slight delay before sliding up
+                    setTimeout(() => {
+                        loader.style.transform = "translateY(-100%)";
+                        document.body.classList.remove('loading');
+                        
+                        // Remove from DOM after transition completes
+                        setTimeout(() => {
+                            loader.remove();
+                        }, 800); 
+                    }, 600);
+                } else {
+                    loaderText.innerText = progress + "%";
+                    loaderBar.style.width = progress + "%";
+                }
+            }, 100); // Speed of the loader update
+            
+            // Mobile Menu Logic
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            
+            function toggleMenu() {
+                const isOpen = !mobileMenu.classList.contains('translate-x-full');
+                
+                if (isOpen) {
+                    // Close menu
+                    mobileMenu.classList.add('translate-x-full');
+                    document.body.classList.remove('menu-open');
+                    mobileMenuBtn.innerHTML = '<i class="ph ph-list transition-transform"></i>';
+                } else {
+                    // Open menu
+                    mobileMenu.classList.remove('translate-x-full');
+                    document.body.classList.add('menu-open');
+                    mobileMenuBtn.innerHTML = '<i class="ph ph-x transition-transform"></i>';
+                }
+            }
+            
+            mobileMenuBtn.addEventListener('click', toggleMenu);
+            
+            // Close menu when a link is clicked
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (!mobileMenu.classList.contains('translate-x-full')) {
+                        toggleMenu();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
